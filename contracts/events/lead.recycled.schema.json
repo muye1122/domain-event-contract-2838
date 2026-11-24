@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/contracts/events/lead.recycled.schema.json",
+  "title": "Lead Recycled Event",
+  "description": "Emitted when an unconverted lead is recycled back to the shared pool.",
+  "type": "object",
+  "required": ["event_id", "event_type", "version", "occurred_at", "org_id", "site_id", "payload"],
+  "properties": {
+    "event_id": { "type": "string", "pattern": "^evt_[a-f0-9]{12,}$", "description": "Globally unique event identifier." },
+    "event_type": { "type": "string", "const": "lead.recycled" },
+    "version": { "type": "string", "enum": ["v1"] },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "org_id": { "type": "string", "minLength": 1 },
+    "site_id": { "type": "string", "minLength": 1 },
+    "payload": {
+      "type": "object",
+      "required": ["lead_id", "reason", "recycled_at", "previous_assignee_id"],
+      "properties": {
+        "lead_id": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string", "enum": ["no_response", "unqualified", "timeout", "withdrawn"] },
+        "recycled_at": { "type": "string", "format": "date-time" },
+        "previous_assignee_id": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

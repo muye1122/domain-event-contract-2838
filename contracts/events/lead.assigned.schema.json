@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/contracts/events/lead.assigned.schema.json",
+  "title": "Lead Assigned Event",
+  "description": "Emitted when a candidate lead is assigned to a recruiter or station.",
+  "type": "object",
+  "required": ["event_id", "event_type", "version", "occurred_at", "org_id", "site_id", "payload"],
+  "properties": {
+    "event_id": { "type": "string", "pattern": "^evt_[a-f0-9]{12,}$", "description": "Globally unique event identifier." },
+    "event_type": { "type": "string", "const": "lead.assigned" },
+    "version": { "type": "string", "enum": ["v1"] },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "org_id": { "type": "string", "minLength": 1 },
+    "site_id": { "type": "string", "minLength": 1 },
+    "payload": {
+      "type": "object",
+      "required": ["lead_id", "assignee_id", "station_id", "assigned_at", "source"],
+      "properties": {
+        "lead_id": { "type": "string", "minLength": 1 },
+        "assignee_id": { "type": "string", "minLength": 1 },
+        "station_id": { "type": "string", "minLength": 1 },
+        "assigned_at": { "type": "string", "format": "date-time" },
+        "source": { "type": "string", "enum": ["web_form", "referral", "campaign", "import"] }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

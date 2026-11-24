@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/contracts/events/demand.published.schema.json",
+  "title": "Demand Published Event",
+  "description": "Emitted when a new hiring or resource demand is published.",
+  "type": "object",
+  "required": ["event_id", "event_type", "version", "occurred_at", "org_id", "site_id", "payload"],
+  "properties": {
+    "event_id": { "type": "string", "pattern": "^evt_[a-f0-9]{12,}$", "description": "Globally unique event identifier." },
+    "event_type": { "type": "string", "const": "demand.published" },
+    "version": { "type": "string", "enum": ["v1"] },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "org_id": { "type": "string", "minLength": 1 },
+    "site_id": { "type": "string", "minLength": 1 },
+    "payload": {
+      "type": "object",
+      "required": ["demand_id", "title", "headcount", "city", "published_at", "channel"],
+      "properties": {
+        "demand_id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "headcount": { "type": "integer", "minimum": 1 },
+        "city": { "type": "string", "minLength": 1 },
+        "published_at": { "type": "string", "format": "date-time" },
+        "channel": { "type": "string", "enum": ["web", "app", "partner", "internal"] }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "version": "v1",
+    "notice": "All identifiers, names and amounts are synthetic. No real personal information. In-memory demo.",
+    "event_types": [
+      "contract.signed",
+      "lead.assigned",
+      "lead.recycled",
+      "quote.approved",
+      "room.status_changed",
+      "demand.published",
+      "certification.approved"
+    ]
+  },
+  "events": [
+    {
+      "event_id": "evt_1a2b3c4d5e6f7081",
+      "event_type": "contract.signed",
+      "version": "v1",
+      "occurred_at": "2026-11-24T09:15:00.000Z",
+      "org_id": "org-demo-001",
+      "site_id": "site-demo-sh-01",
+      "payload": {
+        "contract_id": "ctr-10001",
+        "rider_id": "rider-20001",
+        "signed_at": "2026-11-24T09:14:30.000Z",
+        "channel": "online",
+        "amount": 1280,
+        "currency": "CNY"
+      }
+    },
+    {
+      "event_id": "evt_2b3c4d5e6f708192",
+      "event_type": "lead.assigned",
+      "version": "v1",
+      "occurred_at": "2026-11-24T09:20:00.000Z",
+      "org_id": "org-demo-001",
+      "site_id": "site-demo-sh-01",
+      "payload": {
+        "lead_id": "lead-30001",
+        "assignee_id": "staff-40001",
+        "station_id": "st-sh-001",
+        "assigned_at": "2026-11-24T09:19:00.000Z",
+        "source": "web_form"
+      }
+    },
+    {
+      "event_id": "evt_3c4d5e6f708192a3",
+      "event_type": "lead.recycled",
+      "version": "v1",
+      "occurred_at": "2026-11-24T10:05:00.000Z",
+      "org_id": "org-demo-001",
+      "site_id": "site-demo-sh-02",
+      "payload": {
+        "lead_id": "lead-30001",
+        "reason": "no_response",
+        "recycled_at": "2026-11-24T10:04:00.000Z",
+        "previous_assignee_id": "staff-40001"
+      }
+    },
+    {
+      "event_id": "evt_4d5e6f708192a3b4",
+      "event_type": "quote.approved",
+      "version": "v1",
+      "occurred_at": "2026-11-24T10:30:00.000Z",
+      "org_id": "org-demo-002",
+      "site_id": "site-demo-bj-01",
+      "payload": {
+        "quote_id": "quote-50001",
+        "contract_id": "ctr-10001",
+        "amount": 2400,
+        "currency": "CNY",
+        "approved_by": "manager-60001",
+        "approved_at": "2026-11-24T10:29:00.000Z"
+      }
+    },
+    {
+      "event_id": "evt_5e6f708192a3b4c5",
+      "event_type": "room.status_changed",
+      "version": "v1",
+      "occurred_at": "2026-11-24T11:00:00.000Z",
+      "org_id": "org-demo-002",
+      "site_id": "site-demo-bj-01",
+      "payload": {
+        "room_id": "room-70001",
+        "from_status": "reserved",
+        "to_status": "occupied",
+        "changed_at": "2026-11-24T10:59:00.000Z",
+        "changed_by": "staff-60002"
+      }
+    },
+    {
+      "event_id": "evt_6f708192a3b4c5d6",
+      "event_type": "demand.published",
+      "version": "v1",
+      "occurred_at": "2026-11-24T11:20:00.000Z",
+      "org_id": "org-demo-003",
+      "site_id": "site-demo-gz-01",
+      "payload": {
+        "demand_id": "demand-80001",
+        "title": "Weekend delivery riders",
+        "headcount": 12,
+        "city": "示例市A",
+        "published_at": "2026-11-24T11:19:00.000Z",
+        "channel": "partner"
+      }
+    },
+    {
+      "event_id": "evt_708192a3b4c5d6e7",
+      "event_type": "certification.approved",
+      "version": "v1",
+      "occurred_at": "2026-11-24T12:00:00.000Z",
+      "org_id": "org-demo-003",
+      "site_id": "site-demo-gz-01",
+      "payload": {
+        "certification_id": "cert-90001",
+        "subject_id": "rider-20001",
+        "cert_type": "rider_safety",
+        "approved_by": "auditor-10001",
+        "approved_at": "2026-11-24T11:59:00.000Z",
+        "expires_at": "2027-11-24T11:59:00.000Z"
+      }
+    }
+  ],
+  "edge_cases": {
+    "unknown_fields": {
+      "event_id": "evt_8192a3b4c5d6e7f8",
+      "event_type": "contract.signed",
+      "version": "v1",
+      "occurred_at": "2026-11-24T13:00:00.000Z",
+      "org_id": "org-demo-001",
+      "site_id": "site-demo-sh-01",
+      "future_header_field": "forward-compatible-v2",
+      "payload": {
+        "contract_id": "ctr-10002",
+        "rider_id": "rider-20002",
+        "signed_at": "2026-11-24T12:59:00.000Z",
+        "channel": "station",
+        "amount": 1500,
+        "currency": "CNY",
+        "new_metric_from_v2": { "score": 98 }
+      }
+    },
+    "missing_org_id": {
+      "event_id": "evt_92a3b4c5d6e7f809",
+      "event_type": "lead.assigned",
+      "version": "v1",
+      "occurred_at": "2026-11-24T13:05:00.000Z",
+      "site_id": "site-demo-sh-01",
+      "payload": {
+        "lead_id": "lead-30002",
+        "assignee_id": "staff-40002",
+        "station_id": "st-sh-001",
+        "assigned_at": "2026-11-24T13:04:00.000Z",
+        "source": "import"
+      }
+    }
+  }
+}
